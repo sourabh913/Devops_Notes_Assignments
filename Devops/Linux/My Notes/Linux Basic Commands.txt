@@ -1,0 +1,71 @@
+Linux Basic Commands
+
+1) sudo su  (Change to Root User)
+
+2) whoami (Present User)
+
+3) pwd (Present Working Directory)
+
+4) apt update -y && apt upgrade -y  (Update the OS with Latest packages and upgrade the version of existing packages)
+
+5) apt install ncal (To install Calendar Package)
+
+6) mkdir abcd (Make Directory)
+
+7) ls (list files and directory)
+
+8) ls -ltr (list and details or who and when the directory or file is created)
+
+9) ls -la (gives the list of hidden files and directories also)
+
+10)touch xyz.txt (Create a blank file) [Extension of a file is not required by OS in UNIX, we can give it for our sake]
+
+11) cp (copy file or directory from one location to other)
+
+12 )cd (connect directory)
+
+13) mv (move file or directory and we can rename file or directory)
+
+14) cat filename (Print what is there in file)
+
+15) cat > filename (Add contents to blank File)
+
+16) Ctrl + C (Break or Pause any line)
+
+17) Clear (To Clear Screen)
+
+18) Cat >> filename (To append the line on existing file)
+
+19) Vi filename (VI Editor)
+
+20) hostname <name of the host> (Temporary hostname assign)
+
+21) hostnamectl set-hostname <name of the host> (Permanent hostname assign)
+
+22) nproc (It show the processor information)
+
+23) df (It shows storage information)
+
+24) free (Its shows free space available)
+
+25) lsblk (checks disks and partition in your system)
+
+26) less (It reads a larger text file. can be used in place of cat)
+
+27) rm (remove files and directories)
+
+28) ps (checks and handles processes)
+
+29) top (system monitoring command)
+
+30) fdisk (alternate for lsblk can be used to manage disks and partitions)
+
+31) find (find command is used to find files by size, time)
+
+32) grep (search content in the file)
+
+33) history (it is used to look back on the commands ran in the past)
+
+34) kill (Its used to kill any process manually)
+
+35 man (man is known the manual, its helps in giving information of a particular command)

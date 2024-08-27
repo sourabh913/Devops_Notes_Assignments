@@ -1,0 +1,54 @@
+git clone
+git clone https://github.com/coolgourav147/spring-boot-war-example.git
+
+apt update -y 
+apt install maven -y
+mvn --help
+
+to get the test result
+mvn test
+
+to build jar/war file
+mvn install
+
+copy *.war file to /tmp/ folder
+
+Install tomcat
+apt install tomcat9 -y
+
+Copy war file from tmp folder to tomcat web location and remane hello*.war to app.war
+Tomcat path
+/var/lib/tomcat9/webapps/
+
+ cp /home/ubuntu/hello-world-0.0.1-SNAPSHOT.war /var/lib/tomcat9/webapps/app.war
+
+Install tomcat admin
+
+apt install tomcat9-admin
+
+Click on " manager webapp" on tomcat webpage	
+
+update user config file under
+
+/etc/tomcat9/tomcat-users.xml
+
+restart tomcat
+service tomcat restart
+service tomcat status
+
+Deploy war file from GUI
+
+go to WAR file to deploy>>Select WAR file to upload
+
+***************************
+
+Now above deployment using Jenkins
+
+install below plugins
+
+1. build pipeline
+2. maven
+3. deploy to container
+
+
+

@@ -1,0 +1,59 @@
+Assignments
+
+Jenkins
+========
+
+1) Jenkins Port Change.
+2) How to take backup in Jenkins and Restore.
+3) How to change Jenkins Home Directory.
+4) How to install Jenkins in Tomcat
+5) Remote Job in Jenkins
+6) Webhook through Git
+7) Jenkins Installation Script
+8) Install old version of Jenkins and then upgrade it to a latest version.
+
+AWS
+===
+
+1) How to put https in Jenkins URL (Open Cert option)
+
+
+Linux
+=====
+
+1) Passwordless SSH automate using shell script
+2) If we put any number, the output should give 100 numbers after that using shell script. Script should ask the number and then when number is entered then it should 100 numbers following that number.
+3) If we put any number, it should print the table of that number using shell script.
+4) If I have a file with contents, the script should print the number of lines, words and characters in that file using shell script.
+5) Every evening 5'o clock script should run automatically all the files that are placed in one folder (source) should be copied to another folder (destination). after 30 mins all the files and folder should be deleted from the destination folder.
+6) How storage is mounted in Unix.
+7) Soft link and Hard Link.
+8) If we mount 15 GB, Will i see all storage or some storage and why?
+9) Iptables
+10) Swap Memory
+11) Cron Job
+
+
+Docker
+======
+
+1) Difference between virtualization vs Containerization
+2) Difference between Docker attach and Exec
+3) Difference between Docker kill and Stop
+4) Docker commands
+5) Create Docker Swarm with 2 workers and shutdown the master and see if leader is relected or not.
+6) Docker Swarm Commands
+7) Install jenkins in docker. - Create a container with jenkins installed inside it.
+8) Image se container banaya and then index file create ki container mei, need to run that container on different server. (Will convert container to a file and then run on other server) docker export is the hint
+9) Docker install without internet.
+10) Install docker old version and upgrade to new version.
+11) Docker uninstall
+12) Docker log file location and home path location
+13) Image has been downloaded and where it referenced.
+14) Docker monitoring commands
+15) Docker se container banaya repository image se then wo ek container ban gya, fir container ka URL ban gya and then put you image on it.
+16) Push an image on Docker Hub. (Need to pull image, then create a tag on it and then push it back to docker)
+17) Wo image jinke container nai hai, what are they called and command on how to find out those and how to delete those images.
+18) Mere pass ek index file tmp mei hai and mai usko container mei daalna chahta hu.. th where will i put it and port and command to execute, your container created very good print hona chaiye jab container bane. Command cat should run inside container but should print outside it.
+
+

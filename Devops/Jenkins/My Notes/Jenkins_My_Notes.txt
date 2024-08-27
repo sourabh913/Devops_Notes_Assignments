@@ -1,0 +1,165 @@
+sudo su
+apt update -y && apt upgrade -y && apt install openjdk-17-jdk -y
+java --version
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+sudo apt update -y 
+sudo apt install jenkins -y
+systemctl start jenkins
+
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+===================================================================================
+ nohup java -jar agent.jar -jnlpUrl http://54.210.247.244:8080/computer/slave/jenkins-agent.jnlp -secret be30dc8da24206ce08324051dbfa8947df56e21d4bced7c2dfe3f0680569f3af -workDir "/var/lib/jenkins" &
+[1] 31194
+root@slave:/var/lib/jenkins# nohup: ignoring input and appending output to 'nohup.out'
+
+root@slave:/var/lib/jenkins# jobs -l
+[1]+ 31194 Running                 nohup java -jar agent.jar -jnlpUrl http://54.210.247.244:8080/computer/slave/jenkins-agent.jnlp -secret be30dc8da24206ce08324051dbfa8947df56e21d4bced7c2dfe3f0680569f3af -workDir "/var/lib/jenkins" &
+root@slave:/var/lib/jenkins# ps wx
+
+============================================================================
+
+systemctl enable Jenkins (Jenkins application starts automatically when your Ubuntu instance boots up)
+
+=================================================================================
+How to change Jenkins port
+
+Default port for Jenkins [8080]
+
+New Port for Jenkins [8081]
+
+1) vi /etc/default/Jenkins (Open Jenkins configuration file)
+
+2) Scroll down until you  find the following lines:
+
+# port for HTTP connector (default 8080; disable with -1)
+HTTP_PORT=8080
+
+3) HTTP_PORT=8081 (Edit the second line to include the port number you want to specify)
+
+Esc, then :wq! (Save and Exit the file)
+
+4) vi usr/lib/systemd/system/Jenkins.service (Open Jenkins Service)
+
+Scroll down until you find the below line:
+
+Environment="JENKINS_PORT=8080"
+
+Environment="JENKINS_PORT=8081" (change the port with the new port number)
+
+Esc, then :wq! (Save and Exit the file)
+
+5) systemctl daemon-reload (Reload the Daemon)
+
+6) systemctl restart Jenkins (Restart Jenkins Service)
+
+7) Verify on the Webpage with PublicIP:New port Number
+
+8) Now to make sure all the functionalities of Jenkins are working properly. Need make change to Jenkins URL to reflect the new port Number
+
+Manage Jenkins > System > Jenkins Location > Jenkins URL
+
+change from URL with old port Number to URL with new port number and hit save
+
+9) systemctl restart Jenkins (Restart Jenkins Service)
+ 
+================================================================================
+
+How to change Home Directory of Jenkins
+
+Default home directory path [/var/lib/jenkins]
+
+New Path we want to give is [/home/jenkins_home/jenkins]
+--------------------------------------------------------------------
+1) systemctl stop Jenkins (Stop Jenkins Service)
+
+2) mkdir /home/jenkins_home (Create a new Jenkins Home directory using the mkdir command)
+
+3) chown jenkins:jenkins /home/jenkins_home (Change permissions for the new Home directory)
+
+4) cp -prv /var/lib/jenkins /home/jenkins_home (Copy the contents from the old Jenkins Home directory to the new one)
+
+5) usermod -d /home/jenkins_home Jenkins (Assign Jenkins as the user for the new Home directory)
+
+6) vi /etc/default/Jenkins (Open Jenkins configuration file)
+
+7) Scroll down until you reach the JENKINS_HOME entry
+
+Edit the line to include the path to the new Home directory
+
+In our Case 
+
+NAME=jenkins
+
+JENKINS_HOME=/var/lib/$NAME (old home directory path)
+
+JENKINS_HOME=/home/jenkins_home/$NAME (new home directory path)
+
+Esc, then :wq! (Save and Exit the file)
+
+8) vi usr/lib/systemd/system/Jenkins.service (Open Jenkins Service)
+
+Scroll down until you reach the Environment  and Working Directory
+
+Edit the line to include the path to the new Home directory
+
+In our Case
+
+Environment="JENKINS_HOME=/var/lib/jenkins"   [OLD Entry]
+WorkingDirectory=/var/lib/jenkins
+
+Environment="JENKINS_HOME=/home/jenkins_home/jenkins"  [NEW Entry]
+WorkingDirectory=/home/jenkins_home/jenkins
+
+Esc, then :wq! (Save and Exit the file)
+
+9) systemctl daemon-reload (Reload the Daemon)
+
+10) Rename the old Jenkins home directory
+
+    mv /var/lib/Jenkins /var/lib/Jenkins.old
+
+11) systemctl start Jenkins (Start Jenkins Service)
+
+12) Verify the New Home directory under > Manage Jenkins > System > Home directory
+====================================================================
+
+Define the number of executors
+
+Under Manage Jenkins > System > # of executors
+
+=========================================================
+
+We can change the formatting of System Message from plan text to Safe Html
+
+Manage Jenkins > Security > Markup Formatter > Drop Down to Safe HTML from Plain text 
+
+========================================================
+
+System Message
+
+Under Manage Jenkins > System > System Message
+
+You can Write any outage messages for broadcast display on Jenkins Dashboard.
+
+=============================================
+
+Jenkins URL should always be up to date under Manage Jenkins > System > Jenkins Location > Jenkins URL
+
+==========================================================================
+Create User in Jenkins
+
+Manage Jenkins > Users
+============================================================================
+Need to give Role based Strategy to users in Jenkins.
+
+Role Based strategy is not there by default in Authorization
+
+Need to install Plugin from Manage Jenkins > Plugins > Role Based Authorization strategy
+
+Then change Authorization by going to Manage Jenkins > Security > Drop down under Authorization

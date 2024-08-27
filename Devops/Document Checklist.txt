@@ -1,0 +1,8 @@
+1) Linux Basic Commands - Done (txt file)
+2) Linux Notes - Done (txt file)
+3) Jenkins Installation_Post Deployment - Done (txt, Doc and PDF file)
+4) Jenkins home directory path change and port change - Done (txt file)
+5) Manual Project Build - Done (txt, Doc and PDF file with tomcat 9 and tomcat10)
+6) Automation Project Build - Not Started
+7) Create User without pem file using password_same as root - Done
+8) Passwordless Authentication on Ubuntu - In Progress

@@ -1,0 +1,11 @@
+<role rolename="manager-gui"/>
+<user username="tomcat" password="tomcat" roles="manager-gui"/>
+
+manager-gui - allows access to the HTML GUI and the status pages
+manager-script - allows access to the text interface and the status pages
+manager-jmx - allows access to the JMX proxy and the status pages
+manager-status - allows access to the status pages only
+
+
+<role rolename="manager-gui"/>
+<user username="tomcat" password="tomcat" roles="manager-gui, manager-gui, manager-script, manager-jmx, manager-status"/>

@@ -1,0 +1,35 @@
+Step1: Create directory inside below
+
+#mkdir -p /var/docker/ubuntu/apache
+
+Step2:Go inside direcrory 
+#cd  /var/docker/ubuntu/apache
+
+
+Step3:Create Dockerfile & add below contents
+#vi Dockerfile 
+
+# FROM ubuntu
+MAINTAINER  your_name  <user@domain.tld>
+RUN apt-get update
+RUN apt-get -y install apache2
+RUN echo “Hello Apache server on Ubuntu Docker” > /var/www/html/index.html
+EXPOSE 80
+CMD /usr/sbin/apache2ctl -D FOREGROUND
+
+Step4:Step Build the Docker image 
+
+#docker build -t ubuntu-webserver /var/docker/ubuntu/apache
+
+Step5: Check below build image
+#root /var/docker/ubuntu/apache ? docker images  >>>> check new build image
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu-webserver    latest              d21b8cae1850        13 seconds ago      191MB
+ubuntu              latest              7698f282e524        9 days ago          69.9MB
+
+Step6: Expose 81 port for outside 
+root /var/docker/ubuntu/apache ? docker run -d -p 81:80 ubuntu-webserver   >>> Expose 81 port for outside
+30063e74e3d41251c9821cce5d3ca08eeb117b716537b889b7f9fffd1cf067bb
+
+STEP7: Check webpage 
+#curl http://172.17.0.1:81   >>>> check Page 

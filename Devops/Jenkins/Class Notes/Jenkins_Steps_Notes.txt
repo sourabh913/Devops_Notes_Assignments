@@ -1,0 +1,254 @@
+1. Why/What is Jenkins?
+2. Jenkins Installation
+	make jenkins DNS> echo "public ip_address" "jenkins_loca" >> /etc/hosts  
+3. Dashboard
+	Configuration panel
+		View- To create view for each job/or group of jobs
+		Lockable resources- to check the pronter and other options
+	Buld Queue & Executor status panel
+4. Create First Jenkins jobs
+	There are multiple types of jobs and their details are mentioned along with the jobs
+	Freestyle job-  there are 6 different options in the job
+	Staging area- remm the path
+	jenkin home- remm the path
+	Jenkins execute the shell as script
+	Always give the logical job name instead
+5. Search panel 
+	job name- will redirect to job
+	to go to build- go to job and then write buidl no or write job name and build id
+
+6. Configuration overview- 
+	Manage Jenkins- for admin tasks
+		System- to change any configuration of plugins which you have installed?
+			no of executor- no of job execution together?
+			
+		Tools - to install any tool
+		Manage plaugins
+		Nodes
+		Configure Security
+		manage credentials- to manage userid/password and use in the job
+		Manage users
+	
+	"Rest all are informative information"
+		
+	to go to the failed build- "jobname last failed build "
+7. Plugin Install- simple theme plugin install ?
+	"https://plugins.jenkins.io/"
+
+	Serach Jenkins theme in the Google "http://afonsof.com/jenkins-material-theme/"
+	copy this details from the above site and update the same in the below section.
+	"https://cdn.rawgit.com/afonsof/jenkins-material-theme/gh-pages/dist/material-<mention color name>.css"
+
+	Go to Configure system> Theme> ?
+8. Create User
+9. Jenkins RBAC
+	- Create two users
+	- Install Matrix plugin "Role-based Authorization StrategyVersion" 
+	- Enable Configure security>role based strategy- This will also enable the manage and assign role in Configure global security
+	- manage and assign role 
+		create new role
+				Manage role> "developer" role> provide overall read permission
+							Job build and read permission (later)
+							Agent- this is for slave node
+				Assign role> User/group to add> developer role
+							
+		
+10.  Use of Git plugin and Clean workspace
+	Build Environment>> Delete workspace before build starts
+		
+	git clone "git project path"
+	Create job and selctec buidl option 'shell"
+		ls
+		git clone <git project path>
+		cd <project name>
+		ls
+		cat index.html
+	if you run the job again it'll show error as project is already there
+	to overcome this issue you go to the "build env>delete workspace before build starts
+	
+	You can do the above things using plugin also
+	Create job and select git (git project path) from "source code management"
+	Specify the branch details if not main/master and update the build shell for "ls & cat" ?
+	
+	update git project details and run job again
+11. Trigger build remotely ????????
+	go to job>build trigger remotly>autehnticaton token>URL with token in the browser
+	open incognito mode>paste URL with token in the browser
+	try to execute in server using curl URL with token in the browser
+
+	install plugin "Build Authorization Token Root"
+	Copy url form plugin page and replace job name and token name and run
+
+	>> <Jenkins_URL>buildByToken/build?job=<Job_Name>&token=<token Name>
+
+	Now run on lunix terminal- run the above url with "\" ahead of &  and then run??
+	
+12. Build after other project are build 
+	Build Trigger>Build after other projects are builds-- set this in job 5 and execute job 4 to check... if required set sleep also. this will work if job 4 sucessfull you can setup fail option also. To do the unstable use advance option and mentioned 10 and same in shell script
+
+13. Build Periodically
+	Build trigger> build priodically> check sample and use.	
+	
+
+14. Build trigger>Poll SCM (schedule job)
+		This will check in every given time if any change happened in GIT
+
+15. GitHub hook trigger for GITScm polling
+		Build trigger>GitHub hook trigger for GITScm polling
+		update GIT setting> Webhooks with below URL and 
+		<Jenkins URL>/github-webhook/ and Content type- application/json
+		http://54.160.146.121:8080/github-webhook/
+
+16. Environment variable
+	custom variable >> in shell area
+	name=ajay
+	echo "My name is ${name}"
+	
+	System variable
+	http://44.202.104.111:8080/env-vars.html/
+
+17. Global Environment Variable?
+	variable which can be used in any or all jobs. Also do not need to define in each job.
+	configuration system>Global properties>Environment variables>> name=class
+	example
+		
+	echo "My name is ${name}"
+
+18. Parameterized jobs in Jenkins ????
+	how user can define value/parameter
+	
+	general> This project is parameterized
+					String Parameter
+					Boolean Parameter
+					Choice Parameter
+					password parameter
+					multiline parameter
+
+	Print the parameter in shell panel
+	
+	echo "test user input ${name}"
+	echo "test boolem ${myboolparam}"
+	echo "test choice ${choice}"
+19" create pipeline
+	create two jobs project-dev and project-test, project-prod
+	install plugins "build pipeline"
+	set project dependency on project-test to project-dev and project-prod to project-test
+	create dashboard and setup job depency on upsteam/downstream job
+	Project deployment vs delivery (manual deployment)
+
+20 Manual Project build ?
+	apt install git - to instal git
+	clone git project "https://github.com/ipmdevops/spring-boot-war-example.git" in server
+	install maven- apt install maven -y
+	check mvn --help to test maven
+	run "mvn test" where you have project/pom.xml
+	run "mvn install" to build the project- check war file into target folder once project successful
+	Copy war file to tmp folder
+
+	>>copy war file to tomcat server using CLI
+
+	install tomcat- sudo "apt install tomcat9 -y"
+	Note: tomcat and jenkins share same ports
+
+	>> to change the tomcat port 
+	vi /etc/tomcat9/server.xml
+
+	cd /var/lib/tomcat9/webapps/
+	Copy war file from tmp to /var/lib/tomcat9/webapps/ - with the name of app.war
+	note it also create the folder with same name as war file
+
+	example:
+	cp /home/ubuntu/spring-boot-war-example/target/*.war /var/lib/tomcat9/webapps/apps.war
+	
+	Check the same in browser using tomcal url/war file name
+	i.e: http://34.226.249.168/apps
+
+	>> Now deploying war file using Tomcat GUI
+	open tomcat url and install tomcat9-admin using terminal
+	apt install tomcat9-admin -y
+	restart tomcat9-admin using "service tomcat9 restart"
+	
+	open tomcat url and click on manager webapp
+	Note: this will ask user name and password
+	
+	Cancle the login prompt and copy the role details to below tomcat config file
+	vi /var/lib/tomcat9/conf/tomcat-users.xml
+	Note: change user name and password
+
+	restart tomcat using > service tomcat9 restart
+	
+	login to tomcat and login details
+	deploy war file using GUI
+	select choose file form "war file to deploy" section
+	click on the war link which you have deployed
+	you can also check the war file on mentioned path
+	cd /var/lib/tomcat9/webapps/
+
+20 Automation Project build-?
+	install plugins- build pipeline, maven Integration, deploy to container
+	>install tomcat and tomcat-admin and define user and role & configure and maven
+	Tools configuration>Maven
+	Create job (maven) - hello-world-test> git url and maven "test"
+	Create job (maven) - hello-world-build> git url and maven "install"
+	Create job (free style) - hello-world-deploy-test> (no need to define anything)
+	>>Create job (free style) - hello-world-deploy-prod> (no need to define anything)
+
+	Define dependecy on each job (as per sequence mentioned above)
+
+	hello-world_build> add post build action>Archive the artifact> **/*.war
+
+	Install plugins>Copy Artifact.
+	hello-world-build>General>Permission to Copy Artifact> hello-world-deploy-test, hello-world-deploy-prod
+	hello-world-deploy-test>Build Steps>Copy artifact from other project>hello-world-build and Build Steps>execute shell> ls
+	>> hello-world-deploy-test>add post build action>Archive the artifact> **/*.war
+	hello-world-deploy-test>add post build action>Deploy war/ear to a container>war/ear files> **/*.war
+	hello-world-deploy-test>add post build action>Deploy war/ear to a container>Context path> /app
+	hello-world-deploy-test>add post build action>Deploy war/ear to a container>Container>Tomcat9 (login details) 	and tomcat URL - http://<tomcat URL>
+
+
+sudo chown -R tomcat:tomcat /var/lib/tomcat10  [Ownership]
+
+          <role rolename="manager-gui"/>
+          <role rolename="manager-script"/>
+          <role rolename="manager-jmx"/>
+          <role rolename="manager-status"/>
+          <role rolename="host-manager-gui"/>
+          <role rolename="host-manager-script"/>
+          <user username="tomcat" password="tomcat" roles="manager-gui,manager-script,manager-jmx,manager-status,host-manager-gui,host-manager-script"/>
+
+21 Running job on Jenkins Worker/Salve node ?
+	Create jenkins slave ec2 instance
+	passwordless setup between master and slave
+		ssh-keygen
+		cd /root/.ssh
+		copy id_rsa.pub-- data
+	Login to salve node
+	update and upgrade the instance
+	install open jdk
+	create jenkins director to /var/lib/jenkins
+	paste the id_rsa.pub date to /root/.ssh/authorized_key file
+	In jenkins
+		Manage jenkins>Global securit configuration>Agents>TCP port for inbound agents>Random
+		Manage jenkins>Manage nodes and clouds>New node>Permanent Agent
+		Manage jenkins>Manage nodes and clouds>New node>
+				Remote root directory (/var/lib/jenkins) 
+				Labels (salve)
+				Custom WorkDir path(/var/lib/jenkins) 
+		Manage jenkins>Manage nodes and clouds> select slave node> copy commands
+		Login to salve server>/var/lib/jenkins> execute the above copied command
+
+		Sample command
+			curl -sO http://18.208.184.79:8080/jnlpJars/agent.jar
+		java -jar agent.jar -jnlpUrl http://18.208.184.79:8080/computer/jen%2Dslave/jenkins-agent.jnlp -		secret 58abee259d717fab5abe50954e4582a5209f7b8f6daf02dfd25fc9e9e8c0b945 -workDir 		"/var/lib/jenkins/"
+			
+		create Job> Restrict where this project can be run> Label Expression
+		Run job and test if it's working on slave node
+		
+
+Queries
+
+JenkinsFile Example
+Python Example
+PHP Example
+
+			

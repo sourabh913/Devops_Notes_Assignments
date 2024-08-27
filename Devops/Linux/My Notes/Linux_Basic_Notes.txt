@@ -1,0 +1,53 @@
+Name - Tag
+OS - AMI
+CPU-RAM - Instance
+Firewall -SG
+Login - KP
+Storage - Volume
+
+=========================================
+Linux Basic Commands
+
+sudo su  (Change to Root User)
+whoami (Present User)
+pwd (Present Working Directory)
+apt update -y && apt upgrade -y  (Update the OS with Latest packages and upgrade the version of existing packages)
+apt install ncal (To install Calendar Package)
+Folder (Windows) - Directory (Linux)
+Drive (Windows) - Mount Point (Linux)
+mkdir abcd (Make Directory)
+ls (list files and directory)
+Blue Colour (Directory)
+White Colour (File)
+ls -ltr (list and details or who and when the directory or file is created)
+touch xyz.txt (Create a blank file) [Extension of a file is not required by OS in UNIX, we can give it for our sake]
+cp (copy file or directory from one location to other)
+cd (connect directory)
+mv (move file or directory and we can rename file or directory)
+cat filename (Print what is there in file)
+cat > filename (Add contents to blank File)
+Ctrl + C (Break or Pause any line)
+Clear (To Clear Screen)
+Cat >> filename (To append the line on existing file)
+Vi filename (VI Editor)
+hostname name of the host (Temporary hostname assign)
+hostnamectl set-hostname name of the host (Permanent hostname assign)
+cat /etc/hostname (file to check if permanent hostname is reflected)
+
+===================================================
+Interview questions for Unix
+
+Commands
+Iptables
+one user has internet access other does not have
+Groups
+Permissions
+Swap memory
+epel
+Storage kaise attach karte hai, mount karna and all
+particular package ko kaise update karte hai and uninstall kaise karna hai?
+RHEL and ubuntu mei difference
+bash
+ssh
+passwordless on self and other server
+symlinks (soft and hard links)

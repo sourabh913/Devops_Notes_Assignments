@@ -1,0 +1,70 @@
+Uninstall docker from ubuntu :
+
+sudo systemctl stop docker
+Uninstall Docker Packages:
+
+sudo apt-get purge -y docker-ce docker-ce-cli containerd.io
+sudo apt-get purge -y docker docker-engine docker.io
+
+Remove Docker Data:
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+
+Remove Docker Group (if created):
+sudo groupdel docker
+
+Clean Up Unused Packages:
+sudo apt-get autoremove -y
+
+Remove Docker Configuration Files (optional):
+sudo rm -rf /etc/docker
+Verify Removal:
+
+docker --version
+
+If Docker shows a version after you’ve removed it from Ubuntu, it suggests that some Docker-related binaries or components might still be on your system. Here's a systematic approach to troubleshoot and resolve the issue:
+
+1. Check for Remaining Docker Binaries
+Docker binaries might still be present in directories such as /usr/bin or /usr/local/bin. Check for these files and remove them if they exist:
+
+sudo find /usr/bin /usr/local/bin -name '*docker*' -type f -exec rm -f {} +
+
+2. Check for Docker Installation via Snap
+If Docker was installed via Snap, it might not be removed using apt. Check if Docker is installed as a Snap package:
+snap list | grep docker
+If Docker is listed, remove it with:
+sudo snap remove docker
+
+3. Check for Docker Packages
+Verify that no Docker-related packages are installed. Run:
+dpkg -l | grep -i docker
+If any Docker-related packages appear, remove them:
+sudo apt-get purge -y <package_name>
+
+4. Remove Docker Group
+Check if the Docker user group still exists and remove it:
+sudo groupdel docker
+
+5. Clean Up Docker-related Configuration Files
+Ensure that Docker configuration files are removed:
+sudo rm -rf /etc/docker
+
+6. Update Package Index and Clean Up
+Update your package index and clean up any residual configuration files or dependencies:
+sudo apt-get update
+sudo apt-get autoremove -y
+sudo apt-get autoclean
+
+7. Check System PATH
+Ensure that no leftover Docker binaries are in your system PATH:
+echo $PATH
+Look for directories like /usr/local/bin or /usr/bin where Docker might have been installed and remove any Docker-related files found there.
+
+8. Verify Removal Again
+After performing the steps above, check the Docker version again:
+docker --version
+If you still see Docker's version, the system might be picking up Docker binaries from a different location.
+
+9. Reboot
+Sometimes, a reboot can help to clear out any residual processes or cached paths. Reboot your system:
+
