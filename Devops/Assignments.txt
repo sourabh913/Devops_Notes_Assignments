@@ -1,34 +1,30 @@
 Assignments
 
 Jenkins
-========
+=======
 
-1) Jenkins Port Change.
-2) How to take backup in Jenkins and Restore.
-3) How to change Jenkins Home Directory.
+1) Jenkins Port Change
+2) How to change Jenkins Home Directory
+3) How to take backup in Jenkins and Restore.
 4) How to install Jenkins in Tomcat
 5) Remote Job in Jenkins
 6) Webhook through Git
-7) Jenkins Installation Script
-8) Install old version of Jenkins and then upgrade it to a latest version.
-
-AWS
-===
-
-1) How to put https in Jenkins URL (Open Cert option)
+7) Jenkins Installation Script - Pending
+8) Install old version of Jenkins and then upgrade it to a latest version
+9) How to put https in Jenkins URL (Open Cert option)
 
 
-Linux
-=====
+Linux Basics & Shell Scripting
+==============================
 
 1) Passwordless SSH automate using shell script
-2) If we put any number, the output should give 100 numbers after that using shell script. Script should ask the number and then when number is entered then it should 100 numbers following that number.
-3) If we put any number, it should print the table of that number using shell script.
-4) If I have a file with contents, the script should print the number of lines, words and characters in that file using shell script.
-5) Every evening 5'o clock script should run automatically all the files that are placed in one folder (source) should be copied to another folder (destination). after 30 mins all the files and folder should be deleted from the destination folder.
-6) How storage is mounted in Unix.
-7) Soft link and Hard Link.
-8) If we mount 15 GB, Will i see all storage or some storage and why?
+2) If we put any number, the output should give 100 numbers after that using shell script. Script should ask the number and then when number is entered then it should 100 numbers following that number
+3) If we put any number, it should print the table of that number using shell script
+4) If I have a file with contents, the script should print the number of lines, words and characters in that file using shell script
+5) Every evening 5'o clock script should run automatically all the files that are placed in one folder (source) should be copied to another folder (destination). after 30 mins all the files and folder should be deleted from the destination folder
+6) How storage is mounted in Unix
+7) Soft link and Hard Link
+8) If we mount 15 GB, Will i see all storage or some storage and why
 9) Iptables
 10) Swap Memory
 11) Cron Job
@@ -41,19 +37,44 @@ Docker
 2) Difference between Docker attach and Exec
 3) Difference between Docker kill and Stop
 4) Docker commands
-5) Create Docker Swarm with 2 workers and shutdown the master and see if leader is relected or not.
-6) Docker Swarm Commands
-7) Install jenkins in docker. - Create a container with jenkins installed inside it.
-8) Image se container banaya and then index file create ki container mei, need to run that container on different server. (Will convert container to a file and then run on other server) docker export is the hint
-9) Docker install without internet.
-10) Install docker old version and upgrade to new version.
-11) Docker uninstall
-12) Docker log file location and home path location
-13) Image has been downloaded and where it referenced.
-14) Docker monitoring commands
-15) Docker se container banaya repository image se then wo ek container ban gya, fir container ka URL ban gya and then put you image on it.
-16) Push an image on Docker Hub. (Need to pull image, then create a tag on it and then push it back to docker)
-17) Wo image jinke container nai hai, what are they called and command on how to find out those and how to delete those images.
-18) Mere pass ek index file tmp mei hai and mai usko container mei daalna chahta hu.. th where will i put it and port and command to execute, your container created very good print hona chaiye jab container bane. Command cat should run inside container but should print outside it.
+5) Docker Swarm Commands
+6) Docker monitoring commands
+7) Docker log file location and home path location
+8) Image has been downloaded and where it referenced
+9) Install jenkins in docker. - Create a container with jenkins installed inside it
+10) Install docker old version and upgrade to new version
+11) Docker se container banaya registry image se then wo ek container ban gya, fir container ka URL ban gya and then tag and put your image on it
+12) Push an image on Docker Hub. (Need to pull image, then create a tag on it and then push it back to docker)
+13) Wo image jinke container nai hai, what are they called and command on how to find out those and how to delete those images (Dangling Images)
+14) Image se container banaya and then index file create ki container mei, need to run that container on different server. (Will convert container to a file and then run on other server) docker export is the hint
+15) Mere pass ek index file tmp mei hai and mai usko container mei daalna chahta hu.. th where will i put it and port and command to execute, your container created very good print hona chaiye jab container bane. Command cat should run inside container but should print outside it
+16) Create Docker Swarm with 2 workers and shutdown the master and see if leader is relected or not
+17) Docker swarm Installation and worker join installation script
+18) Docker install without internet
+19) Docker uninstall
 
+Ansible
+=======
+
+1) Docker install on worker nodes without going to each worker
+2) Things to Learn full document
+3) Jenkins install through ansible
+4) Docker install through ansible.
+5) Tomcat through ansible
+6) MySQL through ansible
+
+
+Big Assignment - Project
+========================
+
+1) Created a dockerfile.
+2) Docker file is placed on git.
+3) Create job in Jenkins, integrate the job with git
+4) Any changes in the docker file, then Jenkins job will run
+5) Image is downloaded
+6) Image ki Image create hui and pushed in docker hub
+7) docker hub se download hui server pe
+8) Check whether container is created or not 
+9) If container is created then delete the container and create a new one.
+10) what we did for tomcat in Jenkins same we have to do for docker (Hint)
 
