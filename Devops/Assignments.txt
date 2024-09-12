@@ -1,71 +1,75 @@
 Assignments
 
 Jenkins
-=======
+========
 
-1) Jenkins Port Change
-2) How to change Jenkins Home Directory
-3) How to take backup in Jenkins and Restore.
-4) How to install Jenkins in Tomcat
-5) Remote Job in Jenkins
-6) Webhook through Git
-7) Jenkins Installation Script - Pending
-8) Install old version of Jenkins and then upgrade it to a latest version
-9) How to put https in Jenkins URL (Open Cert option)
+1) Jenkins Port Change - Done
+2) How to change Jenkins Home Directory - Done
+3) Remote Job in Jenkins - Done
+4) Webhook through Git -  Done
+5) How to install Jenkins in Tomcat - Done
+6) Install old version of Jenkins and then upgrade it to a latest version - Done
+7) How to take backup in Jenkins and Restore - Done
+8) Jenkins Installation Script - Done
 
 
-Linux Basics & Shell Scripting
-==============================
+AWS
+===
 
-1) Passwordless SSH automate using shell script
-2) If we put any number, the output should give 100 numbers after that using shell script. Script should ask the number and then when number is entered then it should 100 numbers following that number
-3) If we put any number, it should print the table of that number using shell script
-4) If I have a file with contents, the script should print the number of lines, words and characters in that file using shell script
-5) Every evening 5'o clock script should run automatically all the files that are placed in one folder (source) should be copied to another folder (destination). after 30 mins all the files and folder should be deleted from the destination folder
-6) How storage is mounted in Unix
-7) Soft link and Hard Link
-8) If we mount 15 GB, Will i see all storage or some storage and why
-9) Iptables
-10) Swap Memory
-11) Cron Job
+1) How to put https in Jenkins URL (Open Cert option) - Done
+
+
+Linux
+=====
+
+1) Passwordless SSH automate using shell script - Done
+2) If we put any number, the output should give 100 numbers after that using shell script. Script should ask the number and then when number is entered then it should 100 numbers following that number - Done
+3) If we put any number, it should print the table of that number using shell script - Done
+4) If I have a file with contents, the script should print the number of lines, words and characters in that file using shell script - Done
+5) Every evening 5'o clock script should run automatically all the files that are placed in one folder (source) should be copied to another folder (destination). after 30 mins all the files and folder should be deleted from the destination folder - Done
+6) How storage is mounted in Unix - Done
+7) Soft link and Hard Link - Done
+8) If we mount 15 GB, Will i see all storage or some storage and why - Done
+9) Iptables - Done
+10) Swap Memory - Done
+11) Cron Job - Done
 
 
 Docker
 ======
 
-1) Difference between virtualization vs Containerization
-2) Difference between Docker attach and Exec
-3) Difference between Docker kill and Stop
-4) Docker commands
-5) Docker Swarm Commands
-6) Docker monitoring commands
-7) Docker log file location and home path location
-8) Image has been downloaded and where it referenced
-9) Install jenkins in docker. - Create a container with jenkins installed inside it
-10) Install docker old version and upgrade to new version
-11) Docker se container banaya registry image se then wo ek container ban gya, fir container ka URL ban gya and then tag and put your image on it
-12) Push an image on Docker Hub. (Need to pull image, then create a tag on it and then push it back to docker)
-13) Wo image jinke container nai hai, what are they called and command on how to find out those and how to delete those images (Dangling Images)
-14) Image se container banaya and then index file create ki container mei, need to run that container on different server. (Will convert container to a file and then run on other server) docker export is the hint
-15) Mere pass ek index file tmp mei hai and mai usko container mei daalna chahta hu.. th where will i put it and port and command to execute, your container created very good print hona chaiye jab container bane. Command cat should run inside container but should print outside it
-16) Create Docker Swarm with 2 workers and shutdown the master and see if leader is relected or not
-17) Docker swarm Installation and worker join installation script
-18) Docker install without internet
-19) Docker uninstall
+1) Difference between virtualization vs Containerization - Done
+2) Difference between Docker attach and Exec - Done
+3) Difference between Docker kill and Stop - Done
+4) Docker commands - Done
+5) Docker Swarm Commands - Done
+6) Docker monitoring commands - Done
+7) Docker log file location and home path location - Done
+8) Image has been downloaded and where it referenced. - Done
+10) Install jenkins in docker. - Create a container with jenkins installed inside it - Done
+12) Install docker old version and upgrade to new version - Done
+14) Docker se container banaya repository image se then wo ek container ban gya, fir container ka URL ban gya and then put you image on it - Done
+15) Push an image on Docker Hub. (Need to pull image, then create a tag on it and then push it back to docker) - Done
+16) Wo image jinke container nai hai, what are they called and command on how to find out those and how to delete those images - Done
+
+11) Image se container banaya and then index file create ki container mei, need to run that container on different server. (Will convert container to a file and then run on other server) docker export is the hint - Done
+9) Create Docker Swarm with 2 workers and shutdown the master and see if leader is relected or not - Done
+17) Mere pass ek index file tmp mei hai and mai usko container mei daalna chahta hu.. th where will i put it and port and command to execute, your container created very good print hona chaiye jab container bane. Command cat should run inside container but should print outside it - Done
+18) Docker swarm Installation and worker join installation script - Done
+19) Docker install without internet - Done
+13) Docker uninstall - Done
 
 Ansible
 =======
 
-1) Docker install on worker nodes without going to each worker
-2) Things to Learn full document
-3) Jenkins install through ansible
-4) Docker install through ansible.
-5) Tomcat through ansible
-6) MySQL through ansible
+1) Things to Learn full document - Pending
+2) Jenkins install through ansible - Pending
+3) Docker install through ansible. - Pending
+4) Tomcat through ansible - Pending
+5) MySQL through ansible - Pending
 
 
-Big Assignment - Project
-========================
+Big Assignment - Done
 
 1) Created a dockerfile.
 2) Docker file is placed on git.
@@ -78,3 +82,6 @@ Big Assignment - Project
 9) If container is created then delete the container and create a new one.
 10) what we did for tomcat in Jenkins same we have to do for docker (Hint)
 
+
+
+docker build -t my-nginx .
