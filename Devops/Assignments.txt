@@ -62,11 +62,11 @@ Docker
 Ansible
 =======
 
-1) Things to Learn full document - Pending
-2) Jenkins install through ansible - Pending
-3) Docker install through ansible. - Pending
-4) Tomcat through ansible - Pending
-5) MySQL through ansible - Pending
+1) Things to Learn full document - Done
+2) Jenkins install through ansible - Done
+3) Docker install through ansible. - Done
+4) Tomcat through ansible - Done
+5) MySQL through ansible - Done
 
 
 Big Assignment - Done
@@ -83,5 +83,11 @@ Big Assignment - Done
 10) what we did for tomcat in Jenkins same we have to do for docker (Hint)
 
 
+Kubernetes Assignment
 
-docker build -t my-nginx .
+1) Kubernetes Installation and Worker Node Join
+2) Kubernetes Commands.
+3) Creating a Namespace and changing default namespace to your created namespace.
+4) Create a namespace and allocate resources to that namespace.
+5) Install an old version of Kubernetes and upgrade it to latest version.
+
