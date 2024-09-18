@@ -85,9 +85,9 @@ Big Assignment - Done
 
 Kubernetes Assignment
 
-1) Kubernetes Installation and Worker Node Join
-2) Kubernetes Commands.
-3) Creating a Namespace and changing default namespace to your created namespace.
-4) Create a namespace and allocate resources to that namespace.
-5) Install an old version of Kubernetes and upgrade it to latest version.
+1) Kubernetes Installation and Worker Node Join - Done
+2) Kubernetes Commands - Done
+3) Creating a Namespace and changing default namespace to your created namespace. - Done
+4) Create a namespace and allocate resources to that namespace.- Done
+5) Install an old version of Kubernetes and upgrade it to latest version. - Done
 
