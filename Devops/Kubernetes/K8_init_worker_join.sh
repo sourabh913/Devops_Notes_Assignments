@@ -17,7 +17,7 @@ systemctl restart containerd
 
 # Extract the token line required to join worker node
 ===========================================
-sed -n -e 76p -e 77p /home/test/output.txt > /home/test/out.txt
+sed -n -e 74p -e 75p /home/test/output.txt > /home/test/out.txt
 
 # Add the bin bash to the line so that it acts as a shell script
 ===============================================================
