@@ -1,32 +1,5 @@
 #!/bin/bash
 
-#Set hostname
-===================
-
-sudo hostnamectl set-hostname k8W2
-
-# Create a user and give him root level access
-===========================================
-useradd -m -s /bin/bash test
-
-echo "test:abc123" | chpasswd
-
-sed -i '/PasswordAuthentication yes/s/^#//g' /etc/ssh/sshd_config
-
-echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
-
-echo -e "PermitRootLogin yes" >> /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
-
-echo "test    ALL=(ALL:ALL) ALL" > a.txt
-
-sed -i '47r a.txt' /etc/sudoers
-
-systemctl restart ssh
-
-# Update and Upgrade OS
-============================
-apt update -y && apt upgrade -y
-
 # Install Containerd Steps
 =============================
 
