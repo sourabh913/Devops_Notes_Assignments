@@ -1,8 +1,34 @@
 #!/bin/bash
 
-sudo hostnamectl set-hostname k8
+#Set hostname
+===================
 
+sudo hostnamectl set-hostname k8W2
+
+# Create a user and give him root level access
+===========================================
+useradd -m -s /bin/bash test
+
+echo "test:abc123" | chpasswd
+
+sed -i '/PasswordAuthentication yes/s/^#//g' /etc/ssh/sshd_config
+
+echo "PasswordAuthentication yes" > /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+
+echo -e "PermitRootLogin yes" >> /etc/ssh/sshd_config.d/60-cloudimg-settings.conf
+
+echo "test    ALL=(ALL:ALL) ALL" > a.txt
+
+sed -i '47r a.txt' /etc/sudoers
+
+systemctl restart ssh
+
+# Update and Upgrade OS
+============================
 apt update -y && apt upgrade -y
+
+# Install Containerd Steps
+=============================
 
 swapoff -a
 
@@ -21,6 +47,9 @@ containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
 sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
 
 systemctl restart containerd
+
+# Install Kubernetes Steps for Worker 2
+==================================================
 
 apt-get update
 
@@ -51,36 +80,3 @@ net.ipv4.ip_forward = 1
 EOF
 
 sysctl --system
-
-# Initialize Kubernetes and copy the output to text file
-========================================================
-
-kubeadm init --pod-network-cidr=10.244.0.0/16 > /home/test/output.txt
-
-mkdir -p $HOME/.kube
-
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-
-systemctl restart containerd
-
-# Extract the token line required to join worker node
-===========================================
-sed -n -e 74p -e 75p /home/test/output.txt > /home/test/out.txt
-
-# Add the bin bash to the line so that it acts as a shell script
-===============================================================
-sed '1 i\ #!/bin/bash' /home/test/out.txt > /home/test/final.sh
-
-# Now execute the final shell script on the worker nodes
-===========================================================
-
-for server in $(cat /home/test/ipaddr)
-do
-  
-	ssh test@${server} 'bash -s' < /home/test/final.sh
-
-done

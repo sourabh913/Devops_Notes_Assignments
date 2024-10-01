@@ -29,6 +29,7 @@ sed '1 i\ #!/bin/bash' /home/test/out.txt > /home/test/final.sh
 for server in $(cat /home/test/ipaddr)
 do
   
-	ssh test@${server} 'bash -s' < /home/test/final.sh
+	    scp /home/test/final.sh  test@${server}:/home/test/
+        ssh test@${server} -t `sudo bash final.sh`
 
 done
