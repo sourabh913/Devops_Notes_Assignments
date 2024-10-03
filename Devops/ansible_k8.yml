@@ -1,0 +1,101 @@
+---
+- name: Initialize master and worker nodes
+  hosts: K8M,K8W
+  tasks:
+
+   - name: Disable SWAP
+     shell:  |
+       swapoff -a
+
+   - name: ensure net.bridge.bridge-nf-call-ip6tables is set to 1
+     systctl:
+       name: net.bridge.bridge-nf-call-iptables
+       value: '1'
+       state: present
+       reload: yes
+
+   - name: Installation of apt-utils
+     apt:
+       name: apt-transport-https
+       state: present
+       update_cache: yes
+
+   - name: Adding Docker GPG key
+     apt_key:
+       url: https://download.docker.com/linux/ubuntu/gpg
+       state: present
+
+   - name: Adding Docker GPG key and running the command
+     shell: |
+       sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+
+   - name: Adding Docker Repository
+     apt_repository:
+       repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+       state: present
+
+   - name: Update apt cache again after adding docker repository
+     apt:
+       update_cache: yes
+
+   - name: Installation of Containerd
+     apt:
+      name: containerd.io
+      state: present
+
+   - name: Setting value of SystemdCgroup
+     shell: |
+       containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+       sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+
+   - name: Starting Service of Docker
+     service:
+       name: containerd
+       state: restarted
+       enabled: yes
+
+   - name: Adding Kubernetes GPG key
+     apt_key:
+       url: https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key
+       state: present
+
+   - name: Adding K8 GPG key and running the command
+     shell: |
+       sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+   - name: Add Kubernetes apt repository
+     apt_repository:
+       repo: deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /
+       state: present
+
+   - name: Adding to Source list
+     shell: |
+       sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+   - name: Update apt cache again after adding K8 repository
+     apt:
+      update_cache: yes
+   
+   - name: Update apt cache again after adding K8 repository
+     apt:
+      update_cache: yes
+
+   - name: Install kubelet and kubeadm
+     apt:
+        name: "{{ item }}"
+        state: present
+     loop:
+       - kubeadm
+       - kubelet
+
+   - name: start kubelet
+     service:
+       name: kubelet
+       enabled: yes
+       state: started
+
+   - name: install kubectl
+     apt:
+       name: kubectl
+       state: present
+     when: "'K8M' in group_names"
