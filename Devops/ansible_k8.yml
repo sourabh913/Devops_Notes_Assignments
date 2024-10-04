@@ -1,7 +1,14 @@
 ---
 - name: Initialize master and worker nodes
-  hosts: K8M,K8W
+  hosts: all
+  vars:
+    - docker_url_apt_key: https://download.docker.com/linux/ubuntu/gpg
+    - docker_gpgpath: /etc/apt/trusted.gpg.d/docker.gpg
+    - k8s_url_apt_key: "https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key"
+    - k8s_gpgpath: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    - k8s_repository: "https://pkgs.k8s.io/core:/stable:/v1.31/deb/"
   become: true
+  become_user: test
   tasks:
 
    - name: Disable SWAP
@@ -19,9 +26,6 @@
         - gnupg
         - lsb-release
   
-     docker_url_apt_key: https://download.docker.com/linux/ubuntu/gpg
-     docker_gpgpath: /etc/apt/trusted.gpg.d/docker.gpg
-
    - name: Adding Docker GPG key
      shell: curl -fsSL {{ docker_url_apt_key }} | gpg --dearmor -o {{ k8s_gpgpath }}
      args:
@@ -51,10 +55,6 @@
        name: containerd
        state: restarted
        enabled: yes
-
-     k8s_url_apt_key: "https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key"
-     k8s_gpgpath: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-     k8s_repository: "https://pkgs.k8s.io/core:/stable:/v1.31/deb/"
 
    - name: Adding Kubernetes GPG key
      shell: curl -fsSL {{ k8s_url_apt_key }} | gpg --dearmor -o {{ k8s_gpgpath }}
@@ -88,4 +88,4 @@
      apt:
         name: kubectl
         state: present
-     when: "'masters' in group_names"
+     when: "'master' in group_names"
