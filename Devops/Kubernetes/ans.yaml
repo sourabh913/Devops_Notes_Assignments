@@ -4,8 +4,6 @@
   remote_user: test
   become: yes
   become_method: sudo
-  vars_files:
-    - /etc/ansible/group_vars/all.yaml
   vars:
     - docker_url_apt_key: "https://download.docker.com/linux/ubuntu/gpg"
     - docker_gpgpath: /etc/apt/trusted.gpg.d/docker.gpg
