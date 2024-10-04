@@ -1,0 +1,94 @@
+---
+- name: Initialize master and worker nodes
+  hosts: all
+  remote_user: test
+  become: yes
+  become_method: sudo
+  vars_files:
+    - /etc/ansible/group_vars/all.yaml
+  vars:
+    - docker_url_apt_key: "https://download.docker.com/linux/ubuntu/gpg"
+    - docker_gpgpath: /etc/apt/trusted.gpg.d/docker.gpg
+    - docker_repository: "https://download.docker.com/linux/ubuntu/"
+    - k8s_url_apt_key: "https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key"
+    - k8s_gpgpath: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  tasks:
+
+   - name: Disable SWAP
+     shell:  |
+       swapoff -a
+
+   - name: Install dependencies
+     apt:
+       name: "{{ item }}"
+       state: present
+     with_items:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg
+        - lsb-release
+
+   - name: Adding Docker GPG key
+     shell: curl -fsSL {{ docker_url_apt_key }} | gpg --dearmor -o {{ docker_gpgpath }}
+     args:
+       creates: "{{ docker_gpgpath }}"
+
+   - name: Adding Docker Repository
+     apt_repository:
+       filename: docker
+       repo: deb [arch=amd64] {{docker_repository}} {{ ansible_distribution_release }} stable
+       state: present
+
+   - name: Update apt cache again after adding docker repository
+     apt:
+       update_cache: yes
+
+   - name: Installation of Containerd
+     apt:
+      name: containerd.io
+      state: present
+
+   - name: Setting value of SystemdCgroup
+     shell: |
+       containerd config default | sudo tee /etc/containerd/config.toml >/dev/null 2>&1
+       sed -i 's/SystemdCgroup \= false/SystemdCgroup \= true/g' /etc/containerd/config.toml
+
+   - name: Restarting Service of Containerd
+     service:
+       name: containerd
+       state: restarted
+       enabled: yes
+
+   - name: Adding Kubernetes GPG key
+     shell: curl -fsSL {{ k8s_url_apt_key }} | gpg --dearmor -o {{ k8s_gpgpath }}
+     args:
+       creates: "{{ k8s_gpgpath }}"
+
+   - name: Add Kubernetes apt repository
+     shell: |
+       echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+   - name: Update apt cache again after adding K8 repository
+     apt:
+      update_cache: yes
+
+   - name: Install kubelet and kubeadm
+     apt:
+        name: "{{ item }}"
+        state: present
+     loop:
+       - kubeadm
+       - kubelet
+
+   - name: start kubelet
+     service:
+       name: kubelet
+       enabled: yes
+       state: started
+
+   - name: install kubectl
+     apt:
+        name: kubectl
+        state: present
+     when: "'master' in group_names"
